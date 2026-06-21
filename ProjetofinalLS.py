@@ -41,7 +41,7 @@ def salvar_dados(filmes):
     cinedados = open(arquivo, "w", encoding='utf-8')
     for filme in filmes:
         cinedados.write(f"{filme['id']};{filme['titulo']};{filme['genero']};\
-{filme['duracao']};{filme['ano_lancamento']};{filme['sinopse']}")
+{filme['duracao']};{filme['ano_lancamento']};{filme['sinopse']}\n")
     cinedados.close()
     print('Dados salvos com sucesso!')
 
@@ -79,7 +79,9 @@ def buscar_filme(filmes):
         print("nenhum filme cadastrado")
         return    
     busca = input('Digite o id ou título do filme a ser buscado:')
-    buscaid = int(busca)
+    buscaid = 0
+    if busca == int(busca):
+        buscaid = int(busca)
     for filme in filmes:
         if buscaid == filme['id'] or busca == filme['titulo']:
             print(f"ID: {filme['id']}; Título: {filme['titulo']}; Gênero: {filme['genero']}; \
