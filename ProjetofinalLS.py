@@ -84,14 +84,14 @@ def buscar_filme(filmes):
         if buscaid == filme['id'] or busca == filme['titulo']:
             print(f"ID: {filme['id']}; Título: {filme['titulo']}; Gênero: {filme['genero']}; \
 Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancamento']}; Sinopse: {filme['sinopse']}")
-            return
+    return
     print("filme não encontrado")
      
 def atualizar_filme(filmes):
     if len(filmes) == 0:
         print("nenhum filme cadastrado")
         return
-    busca = input('Digite o id do filme a ser atualizado:')
+    busca = int(input('Digite o id do filme a ser atualizado:'))
     for filme in filmes:
         if busca == filme['id']:
             print(f"ID: {filme['id']}; Título: {filme['titulo']}; Gênero: {filme['genero']}; \
