@@ -1,0 +1,10 @@
+1;www;www;222;222;www
+
+2;eee;eee;333;333;eee
+
+3;Mestres do Universo;Acao;132;2026;O principe Adam deve salvar o reino de Eternia de uma ameaca mortal e se tornar o guerreiro lendario conhecido como He-Man.
+
+4;O Diabo Veste Prada 2;Drama;119;2026;Miranda tera que lidar com as novidades tecnologicas do mundo do jornalismo. Tentando fazer com que a revista Runway nao acabe completamente, ela contara com a ajuda de Emily.
+
+5;2;bbb;222;2022;bbb
+
