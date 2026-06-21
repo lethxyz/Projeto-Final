@@ -75,7 +75,7 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
 
 def buscar_filme(filmes):
     #verificar se há filme cadastrado
-    if filmes.size() == 0:
+    if len(filmes) == 0:
         print("nenhum filme cadastrado")
         return    
     busca = input('Digite o id ou título do filme a ser buscado:')
@@ -88,7 +88,7 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
     print("filme não encontrado")
      
 def atualizar_filme(filmes):
-    if filmes.size() == 0:
+    if len(filmes) == 0:
         print("nenhum filme cadastrado")
         return
     busca = input('Digite o id do filme a ser atualizado:')
