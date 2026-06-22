@@ -174,42 +174,43 @@ def realizar_venda(filmes):
         if ingressoid == filme['id']:
             print(f"ID: {filme['id']}; Título: {filme['titulo']}; Gênero: {filme['genero']}; \
 Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancamento']}; Sinopse: {filme['sinopse']}")
-    sala = input('     Digite a sala de exibição: ')
-    ingressotipo = input('      Digite o tipo de ingresso (inteira/meia): ')
-    ingressoquant = int(input(f'     Digite a quantidade de ingressos {ingressotipo} a ser comprada: '))
-    maisopcao = input('     Deseja comprar mais ingressos? (s/n): ')
-    if maisopcao == 's':
-        ingressotipo2 = input('     Digite o tipo de ingresso (inteira/meia): ')
-        ingressoquant2 = int(input(f'     Digite a quantidade de ingressos {ingressotipo} a ser comprada: '))
-        ingressoquant += ingressoquant2
-        print(f'''
-        CONFIRMAÇÃO DE COMPRA
-        ---------------------
-        Ingresso para o filme: {filme['titulo']}
-        Sala: {sala}
-        Tipo: {ingressotipo} e {ingressotipo2}
-        Quantidade: {ingressoquant}''')
-        verificacao = input('     Confirmar compra? (s/n): ')
-        if verificacao == 's':
-            print("Venda de ingressos realizada com sucesso!")
-            return
-        elif verificacao == 'n':
-            print("Venda de ingressos cancelada.")
-            return
-    print(f'''
-        CONFIRMAÇÃO DE COMPRA
-        ---------------------
-        Ingresso para o filme: {filme['titulo']}
-        Sala: {sala}
-        Tipo: {ingressotipo}
-        Quantidade: {ingressoquant}''')
-    verificacao = input('     Confirmar compra? (s/n): ')
-    if verificacao == 's':
-        print("Venda de ingressos realizada com sucesso!")
-        return
-    elif verificacao == 'n':
-        print("Venda de ingressos cancelada.")
-        return
+            sala = input('     Digite a sala de exibição: ')
+            ingressotipo = input('      Digite o tipo de ingresso (inteira/meia): ')
+            ingressoquant = int(input(f'     Digite a quantidade de ingressos {ingressotipo} a ser comprada: '))
+            maisopcao = input('     Deseja comprar mais ingressos? (s/n): ')
+            if maisopcao == 's':
+                ingressotipo2 = input('     Digite o tipo de ingresso (inteira/meia): ')
+                ingressoquant2 = int(input(f'     Digite a quantidade de ingressos {ingressotipo} a ser comprada: '))
+                ingressoquant += ingressoquant2
+                print(f'''
+                CONFIRMAÇÃO DE COMPRA
+                ---------------------
+                Ingresso para o filme: {filme['titulo']}
+                Sala: {sala}
+                Tipo: {ingressotipo} e {ingressotipo2}
+                Quantidade: {ingressoquant}''')
+                verificacao = input('     Confirmar compra? (s/n): ')
+                if verificacao == 's':
+                    print("Venda de ingressos realizada com sucesso!")
+                    return
+                elif verificacao == 'n':
+                    print("Venda de ingressos cancelada.")
+                    return
+            print(f'''
+                CONFIRMAÇÃO DE COMPRA
+                ---------------------
+                Ingresso para o filme: {filme['titulo']}
+                Sala: {sala}
+                Tipo: {ingressotipo}
+                Quantidade: {ingressoquant}''')
+            verificacao = input('     Confirmar compra? (s/n): ')
+            if verificacao == 's':
+                print("Venda de ingressos realizada com sucesso!")
+                return
+            elif verificacao == 'n':
+                print("Venda de ingressos cancelada.")
+                return
+        print("Filme não encontrado")
 
 #caso não haja arquivo, criará um novo 
 criar = input(inicializacao())
