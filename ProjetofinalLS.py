@@ -105,6 +105,10 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
         0 - Atualizar filme completo
         1 - Atualizar informação específica
         Selecione uma opção: ''')
+            while selecao !='0' and selecao !='0' and selecao == '':
+                    chave = input('''
+        Opção não identificada.
+        Selecione uma opção novamente:''')
             if selecao == '0':
                 titulo = input('Digite o título do filme: ')
                 genero = input('Digite o gênero do filme: ')
@@ -120,15 +124,15 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
         ano_lancamento - Alterar ano de lançamento
         sinopse - Alterar sinopse
         Digite a informação a ser atualizada: ''')
+                while chave not in filme or chave == '':
+                    chave = input('''
+        Informação não encontrada.
+        Digite novamente a informação a ser atualizada:''')
                 if chave in filme:
                     valor = input(f'Digite o novo valor para {chave}: ')
                     if chave == 'ano_lancamento' or chave == 'duracao':
                         valor = int(valor)
                     filme[chave] = valor
-                while chave not in filme or chave == '':
-                    chave = input('''
-        Informação não encontrada.
-        Digite novamente a informação a ser atualizada:''')
             return
     print("filme não encontrado")
 
@@ -136,7 +140,7 @@ criar = input(inicializacao())
 arquivo = ''
 while criar == '':
     criar = input('Opção não identificada. Digite novamente:')
-while criar != 'n' or criar != 's':
+while criar != 'n' and criar != 's':
     criar = input('Opção não identificada. Digite novamente:')
 if criar == 's':
     arquivo = input('''
