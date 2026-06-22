@@ -119,13 +119,16 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
         duracao - Alterar duração
         ano_lancamento - Alterar ano de lançamento
         sinopse - Alterar sinopse
-        Digite a informação a ser atualizada ''')
+        Digite a informação a ser atualizada: ''')
                 if chave in filme:
                     valor = input(f'Digite o novo valor para {chave}: ')
                     if chave == 'ano_lancamento' or chave == 'duracao':
                         valor = int(valor)
                     filme[chave] = valor
-
+                while chave not in filme or chave == '':
+                    chave = input('''
+        Informação não encontrada.
+        Digite novamente a informação a ser atualizada:''')
             return
     print("filme não encontrado")
 
