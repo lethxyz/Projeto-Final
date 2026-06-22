@@ -80,20 +80,18 @@ def buscar_filme(filmes):
         return    
     busca = input('Digite o id ou título do filme a ser buscado:')
     buscaid = 0
+    buscacont = 0
+    #verificar se é um digito para fazer a pesquisa por id
     if busca.isdecimal():
         buscaid = int(busca)
     for filme in filmes:
-        buscacont = 0
         if buscaid == filme['id'] or busca == filme['titulo']:
             print(f"ID: {filme['id']}; Título: {filme['titulo']}; Gênero: {filme['genero']}; \
 Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancamento']}; Sinopse: {filme['sinopse']}")
             buscacont +=1
-        if buscacont == 0:
-            print("filme não encontrado")
-            busca = input('Digite o id ou título do filme a ser buscado:')
-            continue
+    if buscacont == 0:
+        print("filme não encontrado")
 
-     
 def atualizar_filme(filmes):
     if len(filmes) == 0:
         print("nenhum filme cadastrado")
@@ -151,24 +149,24 @@ elif criar == 'n':
         Arquivo não digitado.
         Digite o nome novamente (exemplo.txt): ''')
 filmes = ler_dados()
-opcao = 2
-while opcao != 0:
-    opcao = int(input(mostrar_menu()))
-    if opcao == 1:
+opcao = 1
+while opcao != '0':
+    opcao = input(mostrar_menu())
+    if opcao == '1':
         adicionar_filme(filmes)
-    elif opcao == 2:
+    elif opcao == '2':
         listar_filmes(filmes)
-    elif opcao == 3:
+    elif opcao == '3':
         buscar_filme(filmes)
-    elif opcao == 4:
+    elif opcao == '4':
         atualizar_filme(filmes)
-    elif opcao == 5:
+    elif opcao == '5':
         remover_filme(filmes)
-    elif opcao == 6:
+    elif opcao == '6':
         realizar_venda()
-    elif opcao == 7:
+    elif opcao == '7':
         salvar_dados(filmes)
-    elif opcao == 0:
+    elif opcao == '0':
         salvar_dados(filmes)
         print('Saindo do programa...')
     elif opcao == '':
