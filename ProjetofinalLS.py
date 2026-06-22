@@ -24,9 +24,10 @@ def mostrar_menu():
 def ler_dados():
     filmes = []
     cinedadosler = open(arquivo, "r", encoding='utf-8')
+    #ler todas as linhas do arquivo e armazenar em uma lista
     linhas = cinedadosler.readlines()
+    #Para evitar linhas em branco
     for linha in linhas:
-
         linha_limpa = linha.strip()
         if not linha_limpa:
             continue
@@ -40,6 +41,7 @@ def ler_dados():
 def salvar_dados(filmes):
     cinedados = open(arquivo, "w", encoding='utf-8')
     for filme in filmes:
+        #Forma mais compactada do que a demonstrada na aula para salvar os dados
         cinedados.write(f"{filme['id']};{filme['titulo']};{filme['genero']};\
 {filme['duracao']};{filme['ano_lancamento']};{filme['sinopse']}\n")
     cinedados.close()
@@ -57,12 +59,14 @@ def adicionar_filme(filmes):
         'ano_lancamento': int(ano_lancamento), 'sinopse': sinopse}
     filmes.append(filme)
     print(filme)
+    #Salva automaticamente um novo filme adicionado de forma compactada
     for filme in filmes:
         cinedados.write(f"{filme['id']};{filme['titulo']};{filme['genero']};\
 {filme['duracao']};{filme['ano_lancamento']};{filme['sinopse']}")
     cinedados.close()
     print('Filme adicionado com sucesso!')
-
+    
+'''Função para listar todos os filmes no arquivo'''
 def listar_filmes(filmes):
     #verificar se há filme cadastrado
     if len(filmes) == 0:
@@ -73,10 +77,12 @@ def listar_filmes(filmes):
             print(f"ID: {filme['id']}; Título: {filme['titulo']}; Gênero: {filme['genero']}; \
 Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancamento']}; Sinopse: {filme['sinopse']}")
 
+'''Função de busca para pesquisar os filmes por id ou título, caso haja mais de um filme com 
+o mesmo título ou que o título seja igual a um id, ambos serão listados'''
 def buscar_filme(filmes):
     #verificar se há filme cadastrado
     if len(filmes) == 0:
-        print("nenhum filme cadastrado")
+        print("Nenhum filme cadastrado")
         return    
     busca = input('Digite o id ou título do filme a ser buscado:')
     buscaid = 0
@@ -90,11 +96,11 @@ def buscar_filme(filmes):
 Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancamento']}; Sinopse: {filme['sinopse']}")
             buscacont +=1
     if buscacont == 0:
-        print("filme não encontrado")
+        print("Filme não encontrado")
 
 def atualizar_filme(filmes):
     if len(filmes) == 0:
-        print("nenhum filme cadastrado")
+        print("Nenhum filme cadastrado")
         return
     busca = int(input('Digite o id do filme a ser atualizado:'))
     for filme in filmes:
@@ -105,8 +111,9 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
         0 - Atualizar filme completo
         1 - Atualizar informação específica
         Selecione uma opção: ''')
-            while selecao !='0' and selecao !='0' and selecao == '':
-                    chave = input('''
+            #Todo while que conter '' ou != (opções do input) é para evitar entradas em branco ou inválidas
+            while selecao !='0' and selecao !='1' and selecao == '':
+                selecao = input('''
         Opção não identificada.
         Selecione uma opção novamente:''')
             if selecao == '0':
@@ -124,7 +131,7 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
         ano_lancamento - Alterar ano de lançamento
         sinopse - Alterar sinopse
         Digite a informação a ser atualizada: ''')
-                while chave not in filme or chave == '':
+                while chave not in filme and chave == '':
                     chave = input('''
         Informação não encontrada.
         Digite novamente a informação a ser atualizada:''')
@@ -134,10 +141,39 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
                         valor = int(valor)
                     filme[chave] = valor
             return
-    print("filme não encontrado")
+    print("Filme não encontrado")
 
+def remover_filme(filmes):
+    if len(filmes) == 0:
+        print("Nenhum filme cadastrado")
+        return
+    busca = int(input('Digite o id do filme a ser removido:'))
+    for filme in filmes:
+        if busca == filme['id']:
+            print(f"ID: {filme['id']}; Título: {filme['titulo']}; Gênero: {filme['genero']}; \
+Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancamento']}; Sinopse: {filme['sinopse']}")
+            verificacao = input('''
+        Tem certeza que deseja remover este filme? (s/n): ''')
+            if verificacao == 's':
+                filmes.remove(filme)
+                for filme in filmes:
+                    if filme['id'] > busca:
+                        filme['id'] -= 1
+                print("Filme removido com sucesso!")
+                return
+            elif verificacao == 'n':
+                print("Remoção cancelada.")
+                return
+    print("Filme não encontrado")
+
+def realizar_venda():
+
+    print("Venda de ingressos realizada com sucesso!")
+
+#caso não haja arquivo, criará um novo 
 criar = input(inicializacao())
 arquivo = ''
+#Todo while que conter '' ou != (opções do input) é para evitar entradas em branco ou inválidas
 while criar == '':
     criar = input('Opção não identificada. Digite novamente:')
 while criar != 'n' and criar != 's':
