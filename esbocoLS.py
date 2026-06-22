@@ -35,31 +35,44 @@ def adicionar_filme(filmes):
     filme = {'id': int(id), 'titulo': titulo, 'genero': genero, 'duracao': duracao,
         'ano_lancamento': int(ano_lancamento), 'sinopse': sinopse}
     filmes.append(filme)
-    print(filme)
+    print(f'''
+    ID: {filme['id']} Título: {filme['titulo']}
+    Gênero: {filme['genero']};
+    Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancamento']}
+    Sinopse: {filme['sinopse']}''')
     for filme in filmes:
-        cinedados.write(f"{filme['id']},{filme['titulo']},{filme['genero']},\
-            {filme['duracao']},{filme['ano_lancamento']},{filme['sinopse']}\n")
+        cinedados.write(f"{filme['id']};{filme['titulo']};{filme['genero']};\
+Duração: {filme['duracao']};{filme['ano_lancamento']};{filme['sinopse']}")
     cinedados.close()
     print('Filme adicionado com sucesso!')
 
 def ler_dados():
     filmes = []
-    cinedadosler = open(archive, "r")
+    cinedadosler = open(arquivo, "r", encoding='utf-8')
+    #ler todas as linhas do arquivo e armazenar em uma lista
     linhas = cinedadosler.readlines()
+    #Para evitar linhas em branco
     for linha in linhas:
-        id, titulo, genero, duracao, ano_lancamento, sinopse = linha.split(',')
-        filme = {'id': len(filmes) + 1, 'titulo': titulo, 'genero': genero, 'duracao': duracao,
+        linha_limpa = linha.strip()
+        if not linha_limpa:
+            continue
+        #Forma mais compactada de ler os dados
+        id, titulo, genero, duracao, ano_lancamento, sinopse = linha.split(';')
+        filme = {'id': int(id), 'titulo': titulo, 'genero': genero, 'duracao': duracao,
         'ano_lancamento': int(ano_lancamento), 'sinopse': sinopse}
         filmes.append(filme)
-    return filmes 
+    return filmes
 
 def listar_filmes(filmes):
     if len(filmes) == 0:
         print('Nenhum filme cadastrado.\n')
     else:
         for filme in filmes:
-            print(f"ID: {filme['id']}, Título: {filme['titulo']}, Gênero: {filme['genero']}, \
-Duração: {filme['duracao']} minutos, Ano de Lançamento: {filme['ano_lancamento']}, Sinopse: {filme['sinopse']}\n")
+            print(f'''
+    ID: {filme['id']} Título: {filme['titulo']}
+    Gênero: {filme['genero']};
+    Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancamento']}
+    Sinopse: {filme['sinopse']}\n''')
 
 def buscar_filme(filmes, busca):
     if filmes.size() == 0:

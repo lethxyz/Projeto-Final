@@ -62,7 +62,7 @@ def adicionar_filme(filmes):
     #Salva automaticamente um novo filme adicionado de forma compactada
     for filme in filmes:
         cinedados.write(f"{filme['id']};{filme['titulo']};{filme['genero']};\
-{filme['duracao']};{filme['ano_lancamento']};{filme['sinopse']}")
+Duração: {filme['duracao']};{filme['ano_lancamento']};{filme['sinopse']}")
     cinedados.close()
     print('Filme adicionado com sucesso!')
 
