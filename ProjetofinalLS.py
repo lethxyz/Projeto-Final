@@ -64,7 +64,7 @@ def adicionar_filme(filmes):
     print('Filme adicionado com sucesso!')
 
 def listar_filmes(filmes):
-    #antigo modo de verificar se há filme cadastrado (não alterado por ambos funcionarem)
+    #verificar se há filme cadastrado
     if len(filmes) == 0:
         print('Nenhum filme cadastrado.\n')
     else:
@@ -80,14 +80,19 @@ def buscar_filme(filmes):
         return    
     busca = input('Digite o id ou título do filme a ser buscado:')
     buscaid = 0
-    if busca == int(busca):
+    if busca.isdecimal():
         buscaid = int(busca)
     for filme in filmes:
+        buscacont = 0
         if buscaid == filme['id'] or busca == filme['titulo']:
             print(f"ID: {filme['id']}; Título: {filme['titulo']}; Gênero: {filme['genero']}; \
 Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancamento']}; Sinopse: {filme['sinopse']}")
-    return
-    print("filme não encontrado")
+            buscacont +=1
+        if buscacont == 0:
+            print("filme não encontrado")
+            busca = input('Digite o id ou título do filme a ser buscado:')
+            continue
+
      
 def atualizar_filme(filmes):
     if len(filmes) == 0:
@@ -100,7 +105,29 @@ def atualizar_filme(filmes):
 Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancamento']}; Sinopse: {filme['sinopse']}")
             selecao = input('''
         0 - Atualizar filme completo
-        1 - Atualizar informação específica''')
+        1 - Atualizar informação específica
+        Selecione uma opção: ''')
+            if selecao == '0':
+                titulo = input('Digite o título do filme: ')
+                genero = input('Digite o gênero do filme: ')
+                duracao = input('Digite a duração do filme (em minutos): ')
+                ano_lancamento = int(input('Digite o ano de lançamento do filme: '))
+                sinopse = input('Digite a sinopse do filme: ')
+                filme['titulo'],filme['genero'],filme['duracao'],filme['ano_lancamento'],filme['sinopse'] = titulo,genero,duracao,ano_lancamento,sinopse
+            elif selecao == '1':
+                chave = input('''
+        titulo - Alterar título
+        genero - Alterar gênero
+        duracao - Alterar duração
+        ano_lancamento - Alterar ano de lançamento
+        sinopse - Alterar sinopse
+        Digite a informação a ser atualizada ''')
+                if chave in filme:
+                    valor = input(f'Digite o novo valor para {chave}: ')
+                    if chave == 'ano_lancamento' or chave == 'duracao':
+                        valor = int(valor)
+                    filme[chave] = valor
+
             return
     print("filme não encontrado")
 
