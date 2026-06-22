@@ -121,6 +121,8 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
                 ano_lancamento = int(input('Digite o ano de lançamento do filme: '))
                 sinopse = input('Digite a sinopse do filme: ')
                 filme['titulo'],filme['genero'],filme['duracao'],filme['ano_lancamento'],filme['sinopse'] = titulo,genero,duracao,ano_lancamento,sinopse
+                print('Filme atualizado com sucesso!')
+                print('Não se esqueça de salvar os dados para confirmar alterações!')
             elif selecao == '1':
                 chave = input('''
         titulo - Alterar título
@@ -134,6 +136,8 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
                     if chave == 'ano_lancamento' or chave == 'duracao':
                         valor = int(valor)
                     filme[chave] = valor
+                    print(f'{chave} atualizada com sucesso!')
+                    print('Não se esqueça de salvar os dados para confirmar alterações!')
             return
     print("Filme não encontrado")
 
@@ -154,6 +158,7 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
                     if filme['id'] > busca:
                         filme['id'] -= 1
                 print("Filme removido com sucesso!")
+                print('Não se esqueça de salvar os dados para confirmar alterações!')
                 return
             elif verificacao == 'n':
                 print("Remoção cancelada.")
@@ -161,28 +166,40 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
     print("Filme não encontrado")
 
 def realizar_venda(filmes):
-    ingressoid = input('''
+    ingressoid = int(input('''
         VENDA DE INGRESSOS
         ------------------
-        Digite o id do filme para o qual deseja comprar ingressos: ''')
+        Digite o id do filme para o qual deseja comprar ingressos: '''))
     for filme in filmes:
         if ingressoid == filme['id']:
-             print(f"ID: {filme['id']}; Título: {filme['titulo']}; Gênero: {filme['genero']}; \
+            print(f"ID: {filme['id']}; Título: {filme['titulo']}; Gênero: {filme['genero']}; \
 Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancamento']}; Sinopse: {filme['sinopse']}")
     sala = input('     Digite a sala de exibição: ')
-    ingressotipo = int(input('      Digite o tipo de ingresso (inteira/meia): '))
+    ingressotipo = input('      Digite o tipo de ingresso (inteira/meia): ')
     ingressoquant = int(input(f'     Digite a quantidade de ingressos {ingressotipo} a ser comprada: '))
     maisopcao = input('     Deseja comprar mais ingressos? (s/n): ')
     if maisopcao == 's':
-        ingressotipo2 = int(input('     Digite o tipo de ingresso (inteira/meia): '))
-        ingressoid2 = int(input(f'     Digite a quantidade de ingressos {ingressotipo} a ser comprada: '))
-        ingressotipo += ingressotipo2
+        ingressotipo2 = input('     Digite o tipo de ingresso (inteira/meia): ')
+        ingressoquant2 = int(input(f'     Digite a quantidade de ingressos {ingressotipo} a ser comprada: '))
         ingressoquant += ingressoquant2
-        maisopcao = input('     Deseja comprar mais ingressos? (s/n): ')
+        print(f'''
+        CONFIRMAÇÃO DE COMPRA
+        ---------------------
+        Ingresso para o filme: {filme['titulo']}
+        Sala: {sala}
+        Tipo: {ingressotipo} e {ingressotipo2}
+        Quantidade: {ingressoquant}''')
+        verificacao = input('     Confirmar compra? (s/n): ')
+        if verificacao == 's':
+            print("Venda de ingressos realizada com sucesso!")
+            return
+        elif verificacao == 'n':
+            print("Venda de ingressos cancelada.")
+            return
     print(f'''
         CONFIRMAÇÃO DE COMPRA
         ---------------------
-        Ingresso para o filme: {ingressoid}
+        Ingresso para o filme: {filme['titulo']}
         Sala: {sala}
         Tipo: {ingressotipo}
         Quantidade: {ingressoquant}''')
