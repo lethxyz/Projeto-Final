@@ -65,7 +65,7 @@ def adicionar_filme(filmes):
 {filme['duracao']};{filme['ano_lancamento']};{filme['sinopse']}")
     cinedados.close()
     print('Filme adicionado com sucesso!')
-    
+
 '''Função para listar todos os filmes no arquivo'''
 def listar_filmes(filmes):
     #verificar se há filme cadastrado
@@ -78,7 +78,8 @@ def listar_filmes(filmes):
 Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancamento']}; Sinopse: {filme['sinopse']}")
 
 '''Função de busca para pesquisar os filmes por id ou título, caso haja mais de um filme com 
-o mesmo título ou que o título seja igual a um id, ambos serão listados'''
+o mesmo título ou que o título seja igual a um id, ambos serão listados
+A ideia é que caso a pessoa não saiba o nome exato do filme ou id'''
 def buscar_filme(filmes):
     #verificar se há filme cadastrado
     if len(filmes) == 0:
@@ -94,7 +95,9 @@ def buscar_filme(filmes):
         if buscaid == filme['id'] or busca == filme['titulo']:
             print(f"ID: {filme['id']}; Título: {filme['titulo']}; Gênero: {filme['genero']}; \
 Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancamento']}; Sinopse: {filme['sinopse']}")
+            #Para caso encontre filme, adiciona 1 ao contador
             buscacont +=1
+    #Para caso não encontre nenhum filme, o contador será 0
     if buscacont == 0:
         print("Filme não encontrado")
 
@@ -111,11 +114,6 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
         0 - Atualizar filme completo
         1 - Atualizar informação específica
         Selecione uma opção: ''')
-            #Todo while que conter '' ou != (opções do input) é para evitar entradas em branco ou inválidas
-            while selecao !='0' and selecao !='1' and selecao == '':
-                selecao = input('''
-        Opção não identificada.
-        Selecione uma opção novamente:''')
             if selecao == '0':
                 titulo = input('Digite o título do filme: ')
                 genero = input('Digite o gênero do filme: ')
@@ -131,10 +129,6 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
         ano_lancamento - Alterar ano de lançamento
         sinopse - Alterar sinopse
         Digite a informação a ser atualizada: ''')
-                while chave not in filme and chave == '':
-                    chave = input('''
-        Informação não encontrada.
-        Digite novamente a informação a ser atualizada:''')
                 if chave in filme:
                     valor = input(f'Digite o novo valor para {chave}: ')
                     if chave == 'ano_lancamento' or chave == 'duracao':
@@ -166,9 +160,39 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
                 return
     print("Filme não encontrado")
 
-def realizar_venda():
-
-    print("Venda de ingressos realizada com sucesso!")
+def realizar_venda(filmes):
+    ingressoid = input('''
+        VENDA DE INGRESSOS
+        ------------------
+        Digite o id do filme para o qual deseja comprar ingressos: ''')
+    for filme in filmes:
+        if ingressoid == filme['id']:
+             print(f"ID: {filme['id']}; Título: {filme['titulo']}; Gênero: {filme['genero']}; \
+Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancamento']}; Sinopse: {filme['sinopse']}")
+    sala = input('     Digite a sala de exibição: ')
+    ingressotipo = int(input('      Digite o tipo de ingresso (inteira/meia): '))
+    ingressoquant = int(input(f'     Digite a quantidade de ingressos {ingressotipo} a ser comprada: '))
+    maisopcao = input('     Deseja comprar mais ingressos? (s/n): ')
+    if maisopcao == 's':
+        ingressotipo2 = int(input('     Digite o tipo de ingresso (inteira/meia): '))
+        ingressoid2 = int(input(f'     Digite a quantidade de ingressos {ingressotipo} a ser comprada: '))
+        ingressotipo += ingressotipo2
+        ingressoquant += ingressoquant2
+        maisopcao = input('     Deseja comprar mais ingressos? (s/n): ')
+    print(f'''
+        CONFIRMAÇÃO DE COMPRA
+        ---------------------
+        Ingresso para o filme: {ingressoid}
+        Sala: {sala}
+        Tipo: {ingressotipo}
+        Quantidade: {ingressoquant}''')
+    verificacao = input('     Confirmar compra? (s/n): ')
+    if verificacao == 's':
+        print("Venda de ingressos realizada com sucesso!")
+        return
+    elif verificacao == 'n':
+        print("Venda de ingressos cancelada.")
+        return
 
 #caso não haja arquivo, criará um novo 
 criar = input(inicializacao())
@@ -211,7 +235,7 @@ while opcao != '0':
     elif opcao == '5':
         remover_filme(filmes)
     elif opcao == '6':
-        realizar_venda()
+        realizar_venda(filmes)
     elif opcao == '7':
         salvar_dados(filmes)
     elif opcao == '0':
