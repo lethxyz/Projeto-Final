@@ -134,6 +134,10 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
 
 criar = input(inicializacao())
 arquivo = ''
+while criar == '':
+    criar = input('Opção não identificada. Digite novamente:')
+while criar != 'n' or criar != 's':
+    criar = input('Opção não identificada. Digite novamente:')
 if criar == 's':
     arquivo = input('''
         Digite o nome do arquivo de dados (exemplo.txt): ''')
@@ -151,6 +155,7 @@ elif criar == 'n':
         arquivo = input('''
         Arquivo não digitado.
         Digite o nome novamente (exemplo.txt): ''')
+
 filmes = ler_dados()
 opcao = 1
 while opcao != '0':
