@@ -53,7 +53,7 @@ def salvar_dados(filmes):
 '''Função de adicionar filme com id automático'''
 def adicionar_filme(filmes):
     cinedados = open(arquivo, "w", encoding='utf-8')
-    #adiciona o i com base na quantidade de filmes
+    #adiciona o id com base na quantidade de filmes
     id = len(filmes) + 1
     titulo = input('Digite o título do filme: ')
     genero = input('Digite o gênero do filme: ')
@@ -130,6 +130,7 @@ def atualizar_filme(filmes):
     Título: {filme['titulo']} || Gênero: {filme['genero']}
     Duração: {filme['duracao']} minutos || Ano de Lançamento: {filme['ano_lancamento']}
     Sinopse: {filme['sinopse']}''')
+            #Para caso selecionar entre atualizar todo o filme ou parte dele
             selecao = input('''
         0 - Atualizar filme completo
         1 - Atualizar informação específica
@@ -175,6 +176,7 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
         Tem certeza que deseja remover este filme? (s/n): ''')
             if verificacao == 's':
                 filmes.remove(filme)
+                #Ao remover um filme no meio da lista, não ficará desorganizada, Ex: id: 1 ; id: 3
                 for filme in filmes:
                     if filme['id'] > busca:
                         filme['id'] -= 1
@@ -188,7 +190,6 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
 
 '''Função de realizar vendas de ingressos'''
 def realizar_venda(filmes, ingtotal, ingtotal2):
-    print(ingtotal, ingtotal2)
     buscacount = 0
     ingressoid = int(input('''
         VENDA DE INGRESSOS
@@ -216,6 +217,7 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
             if sala == '02':
                 print(f'     Ingressos disponíveis para o filme {filme["titulo"]} na sala 01: {ingtotal2[ingressoid-1]}')
                 ingressoquant = int(input(f'     Digite a quantidade de ingressos {ingressotipo} a ser comprada: '))
+            #caso deseje comprar de outro tipo ou mais
             maisopcao = input('     Deseja comprar mais ingressos? (s/n): ')
             if maisopcao == 's':
                 ingressotipo2 = input('     Digite o tipo de ingresso (inteira/meia): ')
@@ -325,6 +327,7 @@ while opcao != '0':
     elif opcao == '0':
         salvar_dados(filmes)
         print('Saindo do programa...')
+    #Todo while que conter '' ou != (opções do input) é para evitar entradas em branco ou inválidas
     elif opcao == '':
         print('Opção vazia, digite novamente.')
     else:
