@@ -1,9 +1,10 @@
-1;Toy Story 5;Animação e Comédia;100;2026;Buzz, Woody, Jessie e os demais brinquedos tradicionais são desafiados pela nova obsessão das crianças do século XXI: os dispositivos eletrônicos.
+1;Toy Story 5;Animação e Comédia;100;2025;Buzz, Woody, Jessie e os demais brinquedos tradicionais são desafiados pela nova obsessão das crianças do século XXI: os dispositivos eletrônicos.
 
 2;Mestres do Universo;Ação;132;2026;O príncipe Adam deve salvar o reino de Eternia de uma ameaça mortal, o vilão Esqueleto e seu exército malévolo. Para conseguir proteger todos aqueles que ama, o jovem herdeiro do trono deve recuperar uma espada mítica e se tornar o guerreiro lendário conhecido como He-Man.
 
 3;O Diabo Veste Prada 2;Drama;119;2026;Miranda tera que lidar com as novidades tecnologicas do mundo do jornalismo. Tentando fazer com que a revista Runway nao acabe completamente, ela contara com a ajuda de Emily.
 
-4;2;beabadobee;212;2020;abaebeibiubuobo
+4;aaaa;bbbb;123;2023;kgkfkhbkiyfkhy
 
-5;333;333;333;3033;333333
+5;Interestelar;Ficção Ciêntífica;300;2014;ana
+
