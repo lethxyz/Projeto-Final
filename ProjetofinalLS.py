@@ -1,4 +1,4 @@
-
+'''menu de inicialização para caso já exista um arquvio ou se for necessário criar'''
 def inicializacao():
     menu = ('''
     INICIAR SISTEMA DE GERENCIAMENTO DE CINEMA
@@ -6,6 +6,7 @@ def inicializacao():
         Criar um novo arquivo de dados? (s/n): ''')
     return menu
 
+'''menu principal do sistema, com as operações''' 
 def mostrar_menu():
     menu = ('''
     SISTEMA DE GERENCIAMENTO DE CINEMA
@@ -21,6 +22,7 @@ def mostrar_menu():
         Escolha uma opção: ''')
     return menu
 
+'''Função para ler o arquivo e iniciar o sistema'''
 def ler_dados():
     filmes = []
     cinedadosler = open(arquivo, "r", encoding='utf-8')
@@ -38,6 +40,7 @@ def ler_dados():
         filmes.append(filme)
     return filmes
 
+'''Função para salvar o arquivo'''
 def salvar_dados(filmes):
     cinedados = open(arquivo, "w", encoding='utf-8')
     for filme in filmes:
@@ -47,8 +50,10 @@ def salvar_dados(filmes):
     cinedados.close()
     print('Dados salvos com sucesso!')
 
+'''Função de adicionar filme com id automático'''
 def adicionar_filme(filmes):
     cinedados = open(arquivo, "w", encoding='utf-8')
+    #adiciona o i com base na quantidade de filmes
     id = len(filmes) + 1
     titulo = input('Digite o título do filme: ')
     genero = input('Digite o gênero do filme: ')
@@ -180,8 +185,9 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
                 print("Remoção cancelada.")
                 return
     print("Filme não encontrado")
-    
-def realizar_venda(filmes):
+
+'''Função de realizar vendas de ingressos'''
+def realizar_venda(filmes, ingtotal, ingtotal2):
     print(ingtotal, ingtotal2)
     buscacount = 0
     ingressoid = int(input('''
@@ -196,12 +202,14 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
             sala = input('''
         Salas de Exibição: 01 || 02
         Digite a sala de exibição: ''')
+            #função while para evitar que o usuário digite uma entrada inválida
             while sala != '01' and sala != '02':
                 sala = input('Sala inválida. Digite novamente:')
             ingressotipo = input('      Digite o tipo de ingresso (inteira/meia): ')
             while ingressotipo != 'inteira' and ingressotipo != 'meia':
                 ingressotipo = input('Tipo inválido. Digite novamente: ')
             ingressoquant = 0
+            ingressoquant2 = 0
             if sala == '01':
                 print(f'     Ingressos disponíveis para o filme {filme["titulo"]} na sala 01: {ingtotal[ingressoid-1]}')
                 ingressoquant = int(input(f'     Digite a quantidade de ingressos {ingressotipo} a ser comprada: '))
@@ -211,6 +219,8 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
             maisopcao = input('     Deseja comprar mais ingressos? (s/n): ')
             if maisopcao == 's':
                 ingressotipo2 = input('     Digite o tipo de ingresso (inteira/meia): ')
+                while ingressotipo2 != 'inteira' and ingressotipo2 != 'meia':
+                    ingressotipo2 = input('Tipo inválido. Digite novamente: ')
                 ingressoquant2 = int(input(f'     Digite a quantidade de ingressos {ingressotipo} a ser comprada: '))
                 print(f'''
                 CONFIRMAÇÃO DE COMPRA
@@ -221,6 +231,13 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
                 Quantidade: {ingressoquant} e {ingressoquant2} ''')
                 verificacao = input('     Confirmar compra? (s/n): ')
                 if verificacao == 's':
+                    if sala == '01':
+                        ingtotal[ingressoid-1] -= ingressoquant
+                        ingtotal[ingressoid-1] -= ingressoquant2
+                    if sala == '02':
+                        ingtotal2[ingressoid-1] -= ingressoquant
+                        ingtotal2[ingressoid-1] -= ingressoquant2
+                    print(ingtotal, ingtotal2)
                     print("Venda de ingressos realizada com sucesso!")
                     return
                 elif verificacao == 'n':
@@ -251,10 +268,10 @@ Duração: {filme['duracao']} minutos; Ano de Lançamento: {filme['ano_lancament
         print("Filme não encontrado")
         return
 
-
 #caso não haja arquivo, criará um novo 
 criar = input(inicializacao())
 arquivo = ''
+
 #Todo while que conter '' ou != (opções do input) é para evitar entradas em branco ou inválidas
 while criar == '':
     criar = input('Opção não identificada. Digite novamente:')
@@ -280,12 +297,14 @@ elif criar == 'n':
 
 filmes = ler_dados()
 
+#Para realizar a contagem de ingressos, foi necessário criar lista para cada sala e que fossem fora de alguma função
 ingtotal= []
 ingtotal2= []
 for filme in filmes:
     ingtotal+=[30]
     ingtotal2+=[30]
 
+#menu do sistema de gerenciamento
 opcao = 1
 while opcao != '0':
     opcao = input(mostrar_menu())
@@ -300,7 +319,7 @@ while opcao != '0':
     elif opcao == '5':
         remover_filme(filmes)
     elif opcao == '6':
-        realizar_venda(filmes)
+        realizar_venda(filmes, ingtotal, ingtotal2)
     elif opcao == '7':
         salvar_dados(filmes)
     elif opcao == '0':
